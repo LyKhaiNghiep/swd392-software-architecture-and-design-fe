@@ -15,7 +15,10 @@ const CardComponent = () => {
     cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"  />}
   >
     <img src={logo} 
-    style={{ width:'68px',height:'14px',position: 'absolute',top: '-1',left: '-1',borderTopLeftRadius: '3px'}}
+    style={{
+      width:'68px', height:'14px',position: 'absolute',top: -1,left: -1,
+      borderTopLeftRadius: '3px'
+    }}
     />
     <StyleNameProduct>Sữa bột Bimbosan Stage 2 400g cho bé 6-12 tháng</StyleNameProduct>
     <WrapperReportText>
