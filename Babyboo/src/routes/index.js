@@ -1,7 +1,10 @@
 import HomePage from "../pages/HomePage/HomePage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import OrderPage from "../pages/OrderPage/OrderPage";
+import ProductDetailsPage from "../pages/ProductDetailsPage/ProductDetailsPage";
 import ProductPage from "../pages/ProductPage/ProductPage";
+import SignInPage from "../pages/SigInPage/SignInPage";
+import SignUpPage from "../pages/SignUpPage/SignUpPage";
 import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 
 export const routes = [
@@ -26,7 +29,28 @@ export const routes = [
     },
 
     {
-        path:'/type',
+        path:'/sign-in',
+        page: SignInPage,
+        isShowHeader: true
+
+    },
+
+    {
+        path:'/sign-up',
+        page: SignUpPage,
+        isShowHeader: true
+
+    },
+
+    {
+        path:'/product-details',
+        page: ProductDetailsPage,
+        isShowHeader: true
+
+    },
+
+    {
+        path:'/:type',
         page: TypeProductPage,
         isShowHeader: true
 

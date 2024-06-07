@@ -1,6 +1,6 @@
 import React from 'react'
 import TypeProduct from '../../components/TypeProduct/TypeProduct'
-import { WrapperButtonMore, WrapperTypeProduct } from './style'
+import { WrapperButtonMore, WrapperProduct, WrapperProducts, WrapperTypeProduct } from './style'
 import SliderComponent from '../../components/SliderComponent/SliderComponent'
 import slider1 from '../../assets/images/slider1.png'
 import slider2  from '../../assets/images/slider2.png'
@@ -24,7 +24,7 @@ const HomePage = () => {
       </div>
       <div id='container' style={{ background: '#efefef', padding:'0 120px', height:'1000px' }} >      
       <SliderComponent  arrImages={[slider1, slider2, slider3]}/>
-        <div style={{marginTop: '20px', display:'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap' }}>
+        <WrapperProducts>
           <CardComponent />
           <CardComponent />
           <CardComponent />
@@ -32,7 +32,7 @@ const HomePage = () => {
           <CardComponent />
           <CardComponent />
           <CardComponent />
-        </div>
+        </WrapperProducts>
           <div style={{width: '100%', display: 'flex', justifyContent: 'center', marginTop: '10px' }} >
             <WrapperButtonMore textButton="Xem Thêm" type="outline" styleButton={{
             border: '1px solid rgb(11, 116, 229)', color: 'rgb(11, 116, 229)',
