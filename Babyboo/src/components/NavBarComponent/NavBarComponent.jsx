@@ -67,7 +67,7 @@ const NavBarComponent = () => {
         {renderContent("text", ["Trẻ sơ sinh", "Trẻ từ 1-3 tuổi", "Mẹ bầu"])}
       </WrapperContent>
 
-      <WrapperContent>
+      {/* <WrapperContent>
         {renderContent("checkbox", [
           { value: "a", label: "A" },
           { value: "b", label: "B" },
@@ -76,7 +76,7 @@ const NavBarComponent = () => {
       <WrapperContent>{renderContent("star", [3, 4, 5])}</WrapperContent>
       <WrapperContent>
         {renderContent("price", ["dưới 40.000", "trên 50.000"])}
-      </WrapperContent>
+      </WrapperContent> */}
     </div>
   );
 };
