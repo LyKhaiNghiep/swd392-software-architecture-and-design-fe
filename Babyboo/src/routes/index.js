@@ -50,7 +50,7 @@ export const routes = [
     },
 
     {
-        path:'/:type',
+        path:'/type',
         page: TypeProductPage,
         isShowHeader: true
 
