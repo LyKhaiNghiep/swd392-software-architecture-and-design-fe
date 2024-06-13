@@ -1,15 +1,48 @@
 import React, { useState } from "react";
-import { WrapperContainerLeft, WrapperContainerRight, WrapperTextLight } from "./style";
+import {
+  WrapperContainerLeft,
+  WrapperContainerRight,
+  WrapperTextLight,
+} from "./style";
 import InputForm from "../../components/InputForm/InputForm";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { Image } from "antd";
-import imageLogo from '../../assets/images/login-img.jpg'
-import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+import imageLogo from "../../assets/images/login-img.jpg";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 
 const SignInPage = () => {
-  const{isShowPassword, setIsShowPassword} = useState(false)
+  const navigate = useNavigate();
+  const handleNavigateSignUp = () => {
+    navigate("/sign-up");
+  };
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleOnChangeEmail = (value) => {
+    setEmail(value);
+  };
+
+  const handleOnChangePassword = (value) => {
+    setPassword(value);
+  };
+
+  const handleSignIn = () => {
+    console.log('sign-in', email, password)
+  }
+
   return (
-    <div style={{display:'flex', alignItems:'center',justifyContent:'center', background:'rgba(0,0,0,0.53)', height:'100vh'}}>
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "rgba(0,0,0,0.53)",
+        height: "100vh",
+      }}
+    >
       <div
         style={{
           display: "flex",
@@ -21,17 +54,35 @@ const SignInPage = () => {
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Đăng nhập</p>
-          <InputForm style={{marginBottom: "10px"}} placeholder="abc@gmail.com"/>
-          <div style={{position:"relative"}}>
-            <span style={{zIndex: 10, position:"absolute",top:"4px", right:"8px"}}>
-              {
-                isShowPassword ? (<EyeOutlined />) : (<EyeInvisibleOutlined />)
-              }
+          <InputForm
+            style={{ marginBottom: "10px" }}
+            placeholder="abc@gmail.com"
+            value={email}
+            onChange={handleOnChangeEmail}
+          />
+          <div style={{ position: "relative" }}>
+            <span
+              onClick={() => setIsShowPassword(!isShowPassword)}
+              style={{
+                zIndex: 10,
+                position: "absolute",
+                top: "4px",
+                right: "8px",
+              }}
+            >
+              {isShowPassword ? <EyeOutlined /> : <EyeInvisibleOutlined />}
             </span>
-            <InputForm placeholder="Password" type={isShowPassword ? "text" : "password"} />
+            <InputForm
+              placeholder="Password"
+              type={isShowPassword ? "text" : "password"}
+              value={password}
+              onChange={handleOnChangePassword}
+            />
           </div>
           <ButtonComponent
-            bordered={false}
+            disabled={!email.length || !password.length}
+            onClick={handleSignIn}
+            // bordered={false}
             size={40}
             styleButton={{
               background: "#D37C70",
@@ -39,7 +90,7 @@ const SignInPage = () => {
               width: "100%",
               border: "none",
               borderRadius: "4px",
-              margin: "26px 0 10px"
+              margin: "26px 0 10px",
             }}
             textButton={"Đăng nhập"}
             styleTextButton={{
@@ -48,11 +99,24 @@ const SignInPage = () => {
               fontWeight: "700",
             }}
           ></ButtonComponent>
-          <p><WrapperTextLight>Quên mật khẩu ?</WrapperTextLight></p>
-          <p>Chưa có tài khoản ? <WrapperTextLight>Tạo tài khoản</WrapperTextLight></p>
+          <p>
+            <WrapperTextLight>Quên mật khẩu ?</WrapperTextLight>
+          </p>
+          <p>
+            Chưa có tài khoản ?{" "}
+            <WrapperTextLight onClick={handleNavigateSignUp}>
+              Tạo tài khoản
+            </WrapperTextLight>
+          </p>
         </WrapperContainerLeft>
         <WrapperContainerRight>
-          <Image src={imageLogo} preview={false} alt="image-logo" height="445px" width="400px"/>
+          <Image
+            src={imageLogo}
+            preview={false}
+            alt="image-logo"
+            height="445px"
+            width="400px"
+          />
           {/* <h4>Mua sắm tại BabyBoo</h4> */}
         </WrapperContainerRight>
       </div>

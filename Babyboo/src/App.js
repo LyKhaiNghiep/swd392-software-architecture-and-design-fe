@@ -7,14 +7,17 @@ import { useQuery } from "@tanstack/react-query";
 
 function App() {
 
-  const fetchApi = async () => {
-    const res = axios.get(`${process.env.REACT_APP_API_URL}/products`);
-    return (await res).data;
-  };
+  //Uncomment when use api
+  // const fetchApi = async () => {
+  //   const res = axios.get(`${process.env.REACT_APP_API_URL}/products`);
+  //   return (await res).data;
+  // };
 
-  const query = useQuery({ queryKey: ["todos"], queryFn: fetchApi });
+  // const query = useQuery({ queryKey: ["todos"], queryFn: fetchApi });
 
-  console.log('query',query)
+  // console.log('query',query)
+
+
   return (
     <div>
       <Router>

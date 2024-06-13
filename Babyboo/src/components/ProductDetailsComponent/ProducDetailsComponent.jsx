@@ -61,7 +61,7 @@ const ProducDetailsComponent = () => {
         </div>
         <div style={{display: 'flex', alignItems: 'center', gap:'12px' }}>
             <ButtonComponent
-                bordered={false}
+                // bordered={false}
                 size={40}
                 styleButton={{ 
                     background: '#D37C70',
@@ -75,7 +75,7 @@ const ProducDetailsComponent = () => {
             ></ButtonComponent>
 
                 <ButtonComponent
-                bordered={false}
+                // bordered={false}
                 size={40}
                 styleButton={{ 
                     background: '#fff',
