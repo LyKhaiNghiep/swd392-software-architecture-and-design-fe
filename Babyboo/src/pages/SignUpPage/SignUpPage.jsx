@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   WrapperContainerLeft,
   WrapperContainerRight,
@@ -10,6 +10,10 @@ import imageLogo from "../../assets/images/login-img.jpg";
 import { Image } from "antd";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import * as UserSevice from '../../services/UserSevice'
+import { useMutationHooks } from "../../hooks/useMutationHooks";
+import Loading from "../../components/LoadingComponent/Loading";
+import * as message from '../../components/Message/Message' 
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -27,6 +31,21 @@ const SignUpPage = () => {
     setEmail(value);
   };
 
+  const mutation = useMutationHooks(
+    data => UserSevice.signupUser(data)
+  )
+    const {data, isLoading, isSuccess, isError} = mutation
+    console.log('mutation', mutation)
+
+    useEffect(() => {
+      if(isSuccess){
+        message.success()
+        handleNavigateLogin()
+      }else if(isError){
+        message.error()
+      }
+    },[isSuccess, isError])
+
   const handleOnChangePassword = (value) => {
     setPassword(value);
   };
@@ -35,7 +54,9 @@ const SignUpPage = () => {
   };
 
   const handleSignUp = () => {
-    console.log("sign-up", email, password, confirmPassword);
+    mutation.mutate({ email, password, confirmPassword})
+    // console.log("sign-up", email, password, confirmPassword);
+    
   };
 
   return (
@@ -109,6 +130,8 @@ const SignUpPage = () => {
               onChange={handleOnChangeConfirmPassword}
             />
           </div>
+          {data?.status === 'error' && <span>{data?.message}</span>}
+          {/* <Loading isLoading={isLoading}> */}
           <ButtonComponent
             disabled={
               !email.length || !password.length || !confirmPassword.length
@@ -131,6 +154,7 @@ const SignUpPage = () => {
               fontWeight: "700",
             }}
           ></ButtonComponent>
+            {/* </Loading> */}
           <p>
             Bạn đã có tài khoản ?{" "}
             <WrapperTextLight onClick={handleNavigateLogin}>

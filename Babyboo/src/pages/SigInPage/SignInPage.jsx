@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import {
   WrapperContainerLeft,
   WrapperContainerRight,
@@ -10,16 +10,41 @@ import { Image } from "antd";
 import imageLogo from "../../assets/images/login-img.jpg";
 import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import * as UserSevice from '../../services/UserSevice'
+import { useMutationHooks } from "../../hooks/useMutationHooks";
+import Loading from "../../components/LoadingComponent/Loading";
+import * as message from '../../components/Message/Message' 
 
 const SignInPage = () => {
-  const navigate = useNavigate();
-  const handleNavigateSignUp = () => {
-    navigate("/sign-up");
-  };
+
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+  const navigate = useNavigate();
+
+  const mutation = useMutationHooks(
+    data => UserSevice.loginUser(data)
+  )
+  const {data, isLoading, isSuccess} = mutation
+
+  useEffect(() => {
+    if(isSuccess){
+      message.success()
+      navigate('/')
+      console.log('data', data)
+      // localStorage.setItem('access_token', data?.access_token)
+    }
+  },[isSuccess])
+
+  console.log('mutation', mutation)
+
+  const handleNavigateSignUp = () => {
+    navigate("/sign-up");
+  };
 
   const handleOnChangeEmail = (value) => {
     setEmail(value);
@@ -30,6 +55,10 @@ const SignInPage = () => {
   };
 
   const handleSignIn = () => {
+    mutation.mutate({
+      email,
+      password
+    })
     console.log('sign-in', email, password)
   }
 
@@ -79,26 +108,29 @@ const SignInPage = () => {
               onChange={handleOnChangePassword}
             />
           </div>
-          <ButtonComponent
-            disabled={!email.length || !password.length}
-            onClick={handleSignIn}
-            // bordered={false}
-            size={40}
-            styleButton={{
-              background: "#D37C70",
-              height: "48px",
-              width: "100%",
-              border: "none",
-              borderRadius: "4px",
-              margin: "26px 0 10px",
-            }}
-            textButton={"Đăng nhập"}
-            styleTextButton={{
-              color: "#fff",
-              fontSize: "15px",
-              fontWeight: "700",
-            }}
-          ></ButtonComponent>
+              {/* {data?.status === 'ERR' && <span style={{color: 'red'}}>{data?.message}</span>} */}
+          {/* <Loading isLoading={isLoading}> */}
+            <ButtonComponent
+              disabled={!email.length || !password.length}
+              onClick={handleSignIn}
+              // bordered={false}
+              size={40}
+              styleButton={{
+                background: "#D37C70",
+                height: "48px",
+                width: "100%",
+                border: "none",
+                borderRadius: "4px",
+                margin: "26px 0 10px",
+              }}
+              textButton={"Đăng nhập"}
+              styleTextButton={{
+                color: "#fff",
+                fontSize: "15px",
+                fontWeight: "700",
+              }}
+            ></ButtonComponent>
+          {/* </Loading> */}
           <p>
             <WrapperTextLight>Quên mật khẩu ?</WrapperTextLight>
           </p>
