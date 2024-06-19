@@ -35,7 +35,8 @@ const SignUpPage = () => {
     data => UserSevice.signupUser(data)
   )
     const {data, isLoading, isSuccess, isError} = mutation
-    console.log('mutation', mutation)
+    // console.log('mutation', mutation)
+    
 
     useEffect(() => {
       if(isSuccess){

@@ -14,14 +14,17 @@ import {
 } from "@ant-design/icons";
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
 import { useNavigate } from "react-router-dom";
-
-
+import { useSelector } from "react-redux";
 
 const HeaderComponent = () => {
-  const navigate = useNavigate()
+  //lấy thông tin user khi đã đăng nhập
+  const user = useSelector((state) => state.user);
+  console.log("user", user);
+
+  const navigate = useNavigate();
   const handleNavigateLogin = () => {
-    navigate('/sign-in')
-  }
+    navigate("/sign-in");
+  };
 
   return (
     <div
@@ -50,13 +53,20 @@ const HeaderComponent = () => {
         >
           <WrapperHeaderAccount>
             <UserOutlined style={{ fontSize: "30px" }} />
-            <div onClick={handleNavigateLogin} style={{cursor:'pointer'}}>
-              <WrapperTextHeaderSmall>Đăng Nhập/Đăng ký</WrapperTextHeaderSmall>
-              <div>
-                <WrapperTextHeaderSmall>Tài Khoản</WrapperTextHeaderSmall>
-                <CaretDownOutlined />
+            {/* check có thông tin user rồi chèn */}
+            {user?.name ? (
+              <div style={{ cursor: "pointer" }}>{user.name}</div>
+            ) : (
+              <div onClick={handleNavigateLogin} style={{ cursor: "pointer" }}>
+                <WrapperTextHeaderSmall>
+                  Đăng Nhập/Đăng ký
+                </WrapperTextHeaderSmall>
+                <div>
+                  <WrapperTextHeaderSmall>Tài Khoản</WrapperTextHeaderSmall>
+                  <CaretDownOutlined />
+                </div>
               </div>
-            </div>
+            )}
           </WrapperHeaderAccount>
           <div>
             <Badge count={4} size="small">

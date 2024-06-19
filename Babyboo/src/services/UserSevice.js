@@ -20,3 +20,21 @@ export const signupUser = async (data) => {
         throw error;
     }
 }
+
+//Để api get user vào link
+// export const getDetailsUser = async (id) => {
+//     console.log('API URL:', process.env.REACT_APP_API_URL); // Dòng gỡ lỗi
+//     try {
+//                                                                  //example link "/user/get-details/${id}"
+//         const res = await axios.get(`${process.env.REACT_APP_API_URL}/users/register`, {
+//             headers: {
+//                 token: `Bearer ${access_token}`, 
+//             }
+//         });
+        
+//         return res.data;
+//     } catch (error) {
+//         console.error('Error logging in:', error);
+//         throw error;
+//     }
+// }

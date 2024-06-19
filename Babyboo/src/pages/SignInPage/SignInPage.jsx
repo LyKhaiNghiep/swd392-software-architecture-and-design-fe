@@ -14,7 +14,10 @@ import { useMutation } from "@tanstack/react-query";
 import * as UserSevice from '../../services/UserSevice'
 import { useMutationHooks } from "../../hooks/useMutationHooks";
 import Loading from "../../components/LoadingComponent/Loading";
-import * as message from '../../components/Message/Message' 
+import * as message from '../../components/Message/Message' ;
+import { jwtDecode } from "jwt-decode";
+import {useDispatch} from "react-redux";
+import { updateUser } from "../../redux/slides/userSlide";
 
 const SignInPage = () => {
 
@@ -23,6 +26,7 @@ const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -35,10 +39,23 @@ const SignInPage = () => {
     if(isSuccess){
       message.success()
       navigate('/')
-      console.log('data', data)
-      // localStorage.setItem('access_token', data?.access_token)
+      // console.log('data', data)
+      localStorage.setItem('access_token', data?.access_token)
+      if(data?.access_token) {
+        const decoded = jwtDecode(data?.access_token)
+        console.log('decode',decoded)
+        if (decoded?.id) {
+          // handleGetDetailsUser(decoded?.id, data?.access_token)
+        }
+      }
     }
   },[isSuccess])
+
+  // const handleGetDetailsUser = async(id, token) => {
+  //   const res = await UserSevice.getDetailsUser(id,token)
+  //   dispatch(updateUser({...res?.data, access_token: token}))
+  //   console.log('res', res)
+  // }
 
   console.log('mutation', mutation)
 
