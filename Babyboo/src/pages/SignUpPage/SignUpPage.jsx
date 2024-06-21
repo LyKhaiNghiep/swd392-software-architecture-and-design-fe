@@ -23,9 +23,14 @@ const SignUpPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const handleOnChangeUsername = (value) => {
+    setUsername(value);
+  };
 
   const handleOnChangeEmail = (value) => {
     setEmail(value);
@@ -55,7 +60,7 @@ const SignUpPage = () => {
   };
 
   const handleSignUp = () => {
-    mutation.mutate({ email, password, confirmPassword })
+    mutation.mutate({ username, email, password, confirmPassword })
     // console.log("sign-up", email, password, confirmPassword);
 
   };
@@ -81,6 +86,12 @@ const SignUpPage = () => {
         <WrapperContainerLeft>
           <h1>Xin chào</h1>
           <p>Tạo tài khoản</p>
+          <InputForm
+            style={{ marginBottom: "10px" }}
+            placeholder="abc"
+            value={username}
+            onChange={handleOnChangeUsername}
+          />
           <InputForm
             style={{ marginBottom: "10px" }}
             placeholder="abc@gmail.com"
