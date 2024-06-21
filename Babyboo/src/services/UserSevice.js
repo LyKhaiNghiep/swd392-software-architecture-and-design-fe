@@ -13,7 +13,7 @@ export const loginUser = async (data) => {
 export const signupUser = async (data) => {
     console.log('API URL:', process.env.REACT_APP_API_URL); // Dòng gỡ lỗi
     try {
-        const res = await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, data);
+        const res = await axios.post(`${process.env.REACT_APP_API_URL}/users`, data);
         return res.data;
     } catch (error) {
         console.error('Error logging in:', error);
