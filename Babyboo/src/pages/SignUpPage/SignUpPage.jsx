@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import * as UserSevice from '../../services/UserSevice'
 import { useMutationHooks } from "../../hooks/useMutationHooks";
 import Loading from "../../components/LoadingComponent/Loading";
-import * as message from '../../components/Message/Message' 
+import * as message from '../../components/Message/Message'
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -34,18 +34,18 @@ const SignUpPage = () => {
   const mutation = useMutationHooks(
     data => UserSevice.signupUser(data)
   )
-    const {data, isLoading, isSuccess, isError} = mutation
-    // console.log('mutation', mutation)
-    
+  const { data, isLoading, isSuccess, isError, error } = mutation
+  // console.log('mutation', mutation)
 
-    useEffect(() => {
-      if(isSuccess){
-        message.success()
-        handleNavigateLogin()
-      }else if(isError){
-        message.error()
-      }
-    },[isSuccess, isError])
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success()
+      handleNavigateLogin()
+    } else if (isError) {
+      message.error(error?.response?.data?.message || "Signup failed. Please try again.");
+    }
+  }, [isSuccess, isError])
 
   const handleOnChangePassword = (value) => {
     setPassword(value);
@@ -55,9 +55,9 @@ const SignUpPage = () => {
   };
 
   const handleSignUp = () => {
-    mutation.mutate({ email, password, confirmPassword})
+    mutation.mutate({ email, password, confirmPassword })
     // console.log("sign-up", email, password, confirmPassword);
-    
+
   };
 
   return (
@@ -155,7 +155,7 @@ const SignUpPage = () => {
               fontWeight: "700",
             }}
           ></ButtonComponent>
-            {/* </Loading> */}
+          {/* </Loading> */}
           <p>
             Bạn đã có tài khoản ?{" "}
             <WrapperTextLight onClick={handleNavigateLogin}>
