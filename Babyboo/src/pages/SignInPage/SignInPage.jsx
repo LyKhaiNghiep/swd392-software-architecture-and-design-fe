@@ -33,21 +33,24 @@ const SignInPage = () => {
   const mutation = useMutationHooks(
     data => UserSevice.loginUser(data)
   )
-  const {data, isLoading, isSuccess} = mutation
+  const {data: userData, isLoading, isSuccess} = mutation
 
   useEffect(() => {
     if(isSuccess){
       message.success()
+      localStorage.setItem('user', JSON.stringify(userData));
+
       navigate('/')
+
       // console.log('data', data)
-      localStorage.setItem('access_token', data?.access_token)
-      if(data?.access_token) {
-        const decoded = jwtDecode(data?.access_token)
-        console.log('decode',decoded)
-        if (decoded?.id) {
-          // handleGetDetailsUser(decoded?.id, data?.access_token)
-        }
-      }
+      // localStorage.setItem('access_token', data?.access_token)
+      // if(data?.access_token) {
+      //   const decoded = jwtDecode(data?.access_token)
+      //   console.log('decode',decoded)
+      //   if (decoded?.id) {
+      //     // handleGetDetailsUser(decoded?.id, data?.access_token)
+      //   }
+      // }
     }
   },[isSuccess])
 

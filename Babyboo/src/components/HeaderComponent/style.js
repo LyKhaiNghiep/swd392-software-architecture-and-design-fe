@@ -36,6 +36,11 @@ export const WrapperHeaderAccount = styled.div`
     font-size: 12px;
     color: ${COLORS.WHILE};
     white-space: nowrap;
-  
+    `
+    export const WrapperContentPopup = styled.p`
+        cursor: pointer;
+        &:hover{
+            color: rgb(83, 148, 194);
+        }
     `
     

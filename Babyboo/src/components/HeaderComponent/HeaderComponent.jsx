@@ -1,6 +1,7 @@
 import React from "react";
-import { Badge, Col } from "antd";
+import { Badge, Button, Col, Popover } from "antd";
 import {
+  WrapperContentPopup,
   WrapperHeader,
   WrapperHeaderAccount,
   WrapperTextHeader,
@@ -15,17 +16,43 @@ import {
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import * as UserSevice from '../../services/UserSevice'
+
+
 
 const HeaderComponent = () => {
   //lấy thông tin user khi đã đăng nhập
-  const user = useSelector((state) => state.user);
-  console.log("user", user);
+  // const user = useSelector((state) => state.user);
+  // console.log("user", user);
 
   const navigate = useNavigate();
   const handleNavigateLogin = () => {
     navigate("/sign-in");
   };
+  
+    // Lấy thông tin người dùng từ localStorage
+    const user = JSON.parse(localStorage.getItem('user'));
+      console.log("user", user);
 
+      const handleLogout = async () => {
+        try {
+          await UserSevice.logoutUser();
+          // Xóa thông tin người dùng từ localStorage
+          localStorage.removeItem("user");
+          // Điều hướng về trang đăng nhập
+          navigate("/");
+        } catch (error) {
+          console.error("Logout error", error);
+        }
+      };
+
+  const content =(
+    <div>
+      <WrapperContentPopup onClick={handleLogout}>Đăng xuất</WrapperContentPopup>
+      <WrapperContentPopup onClick={() => navigate('/profile-user')}>Thông tin người dùng</WrapperContentPopup>
+    </div>
+  )
+    
   return (
     <div
       style={{
@@ -52,10 +79,14 @@ const HeaderComponent = () => {
           style={{ display: "flex", gap: "54px", alignItems: "center" }}
         >
           <WrapperHeaderAccount>
-            <UserOutlined style={{ fontSize: "30px" }} />
-            {/* check có thông tin user rồi chèn */}
-            {user?.name ? (
-              <div style={{ cursor: "pointer" }}>{user.name}</div>
+          <UserOutlined style={{ fontSize: "30px" }} />
+            {/* Kiểm tra và hiển thị username nếu người dùng đã đăng nhập */}
+            {user?.username ? (
+              <>
+                <Popover content={content} trigger="click">
+                 <div style={{ cursor: "pointer" }}>{user.username}</div>
+                </Popover>
+              </>
             ) : (
               <div onClick={handleNavigateLogin} style={{ cursor: "pointer" }}>
                 <WrapperTextHeaderSmall>
