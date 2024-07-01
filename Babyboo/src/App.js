@@ -45,11 +45,12 @@ function App() {
   //   const res = await UserService.getDetailsUser(id,token)
   //   dispatch(updateUser({...res?.data,access_token: token}))
   // }
+  
   //Uncomment when use api
   // const fetchApi = async () => {
   //   const res = axios.get(`${process.env.REACT_APP_API_URL}/products`);
   //   return (await res).data;
-  // };
+  // }; 
 
   // const query = useQuery({ queryKey: ["todos"], queryFn: fetchApi });
 

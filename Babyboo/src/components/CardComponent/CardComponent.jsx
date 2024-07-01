@@ -9,10 +9,11 @@ import {
 import { StarFilled } from "@ant-design/icons";
 import logo from "../../assets/images/logo.png";
 //tạo prop lấy attribute product
-// const CardComponent = (props) => {
-//   const { countInStock, description, image, name, price, rating, type } = props;
+const CardComponent = (props) => {
+  const { countInStock, description, image, name, price, rating, brand } = props;
+  console.log({name})
 
-  const CardComponent = () => {
+  // const CardComponent = () => {
   return (
     <WrapperCardStyle
       hoverable
@@ -22,7 +23,7 @@ import logo from "../../assets/images/logo.png";
       cover={
         <img
           alt="example"
-          src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+          src={image}
         />
       }
     >
@@ -37,21 +38,21 @@ import logo from "../../assets/images/logo.png";
           borderTopLeftRadius: "3px",
         }}
       />
-      {/* <StyleNameProduct>{name}</StyleNameProduct> */}
-      <StyleNameProduct>Sữa bột Bimbosan Stage 2 400g cho bé 6-12 tháng</StyleNameProduct>
+      <StyleNameProduct>{name}</StyleNameProduct>
+      {/* <StyleNameProduct>Sữa bột Bimbosan Stage 2 400g cho bé 6-12 tháng</StyleNameProduct> */}
       <WrapperReportText>
         <span style={{ marginRight: "4px" }}>
 
-          {/* <span>{rating}</span><StarFilled style={{ fontSize: "12px", color: "yellow" }} /> */}
-          <span>4.5 </span><StarFilled style={{fontSize: '12px', color:'yellow'}} />
+          <span>{rating}</span><StarFilled style={{ fontSize: "12px", color: "yellow" }} />
+          {/* <span>4.5 </span><StarFilled style={{fontSize: '12px', color:'yellow'}} /> */}
 
         </span>
         <span>|đã bán 1000+</span>
       </WrapperReportText>
       <WrapperPriceText>
 
-        {/* <span style={{ marginRight: "8px" }}>{price}</span> */}
-        <span style={{ marginRight: "8px" }}>1.000.000đ</span>
+        <span style={{ marginRight: "8px" }}>{price}.000VNĐ</span>
+        {/* <span style={{ marginRight: "8px" }}>1.000.000đ</span> */}
 
         <WrapperDiscountText>-5%</WrapperDiscountText>
       </WrapperPriceText>

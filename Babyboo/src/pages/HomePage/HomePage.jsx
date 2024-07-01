@@ -19,6 +19,7 @@ const HomePage = () => {
   const fetchProductAll = async () => {
     const res = await ProductService.getAllProduct();
     console.log("res", res);
+    return res
   };
   const { isLoading, data: products } = useQuery(
     ["products"],
@@ -49,9 +50,8 @@ const HomePage = () => {
         >
           <SliderComponent arrImages={[slider1, slider2, slider3]} />
           <WrapperProducts>
-            {products?.data?.map((product) => {
+            {products?.map((product) => {
               return (
-                //thêm các attribute của product vào đây
                 <CardComponent
                   key={product._id}
                   countInStock={product.countInStock}
@@ -60,17 +60,17 @@ const HomePage = () => {
                   name={product.name}
                   price={product.price}
                   rating={product.rating}
-                  type={product.type}
+                  brand={product.brand}
                 />
               );
             })}
+            {/* <CardComponent />
             <CardComponent />
             <CardComponent />
             <CardComponent />
             <CardComponent />
             <CardComponent />
-            <CardComponent />
-            <CardComponent />
+            <CardComponent /> */}
           </WrapperProducts>
           <div
             style={{
