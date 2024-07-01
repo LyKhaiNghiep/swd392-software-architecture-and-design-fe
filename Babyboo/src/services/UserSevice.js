@@ -16,7 +16,7 @@ export const signupUser = async (data) => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/users`, data);
         return res.data;
     } catch (error) {
-        console.error('Error sigup in:', error);
+        console.error('Error signing up in:', error);
         throw error;
     }
 }
@@ -45,7 +45,7 @@ export const logoutUser = async (data) => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/users/logout`);
         return res.data;
     } catch (error) {
-        console.error('Error sigup in:', error);
+        console.error('Error logging out in:', error);
         throw error;
     }
 }
@@ -56,7 +56,7 @@ export const updateUser = async (id, data) => {
         const res = await axios.post(`${process.env.REACT_APP_API_URL}/users.update${id}`, data);
         return res.data;
     } catch (error) {
-        console.error('Error sigup in:', error);
+        console.error('Error update in:', error);
         throw error;
     }
 }
