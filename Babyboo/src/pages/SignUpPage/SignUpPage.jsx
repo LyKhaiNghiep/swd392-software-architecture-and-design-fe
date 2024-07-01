@@ -23,7 +23,7 @@ const SignUpPage = () => {
 
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
-  const [username, setUsername] = useState("");
+  const [username,setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -60,7 +60,7 @@ const SignUpPage = () => {
   };
 
   const handleSignUp = () => {
-    mutation.mutate({ username, email, password, confirmPassword })
+    mutation.mutate({username, email, password, confirmPassword })
     // console.log("sign-up", email, password, confirmPassword);
 
   };
